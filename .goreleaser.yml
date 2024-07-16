@@ -25,6 +25,17 @@ builds:
 #      - linux_amd64
 #      - linux_arm64
       - windows_amd64
+
+signs:
+  - ids:
+      - "win"
+    artifacts: binary
+    cmd: pwsh
+    args:
+      - "-c"
+      - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
+    output: true
+
 archives:
   - builds:
       - win
@@ -48,13 +59,3 @@ checksum:
     - "win"
     - mac
   name_template: '{{ .ProjectName }}_checksums.txt'
-
-signs:
-  - ids:
-      - "win"
-#    artifacts: binary
-    cmd: pwsh
-    args:
-      - "-c"
-      - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
-    output: true
