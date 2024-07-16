@@ -52,7 +52,7 @@ checksum:
 signs:
   - ids:
       - "win"
-    artifacts: binary
+#    artifacts: binary
     cmd: pwsh
     args:
       - "-c"
