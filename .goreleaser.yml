@@ -47,13 +47,14 @@ changelog:
 checksum:
   ids:
     - "win"
+    - mac
   disable: false
   split: false
   name_template: '{{ .ProjectName }}_checksums.txt'
 
 signs:
   - ids:
-      - win
+      - "win"
     artifacts: binary
     cmd: pwsh
     args:
