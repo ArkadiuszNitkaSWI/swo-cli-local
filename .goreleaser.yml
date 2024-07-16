@@ -30,6 +30,7 @@ archives:
     builds:
       - win
       - linux
+      - mac
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
     format: zip
 
