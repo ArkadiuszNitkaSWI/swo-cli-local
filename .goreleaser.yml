@@ -27,8 +27,7 @@ builds:
       - windows_amd64
 
 signs:
-  - ids:
-      - "win"
+  -
     artifacts: binary
     cmd: pwsh
     args:
