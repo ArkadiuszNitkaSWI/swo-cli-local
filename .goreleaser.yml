@@ -1,4 +1,3 @@
-version: 2
 env:
   - CGO_ENABLED=0
   - REPO_OWNER=solarwinds

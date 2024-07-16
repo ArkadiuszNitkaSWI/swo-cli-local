@@ -23,6 +23,9 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: 1.22
+      - name: Install SignPath Powershell module
+        shell: pwsh
+        run: Install-Module -Name SignPath
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
