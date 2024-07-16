@@ -4,7 +4,7 @@ env:
   - REPO_NAME=swo-cli
 builds:
   - main: ./cmd/swo/main.go
-    id: linux
+    id: "linux"
     binary: swo
     ldflags:
       - "-s -w -X 'main.version=v{{ .Version }}'"
@@ -15,7 +15,7 @@ builds:
       - linux_arm64
 #      - windows_amd64
   - main: ./cmd/swo/main.go
-    id: win
+    id: "win"
     binary: swo
     ldflags:
       - "-s -w -X 'main.version=v{{ .Version }}'"
@@ -54,11 +54,8 @@ signs:
   - ids:
       - win
     artifacts: binary
-    env:
-      - FOO=bar
-      - HONK=honkhonk
     cmd: pwsh
-
     args:
       - "-c"
       - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
+    output: true
