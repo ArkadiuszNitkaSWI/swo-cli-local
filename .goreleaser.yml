@@ -59,6 +59,7 @@ signs:
       - FOO=bar
       - HONK=honkhonk
     cmd: pwsh
+
     args:
       - "-c"
       - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
