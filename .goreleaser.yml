@@ -34,16 +34,18 @@ archives:
     format: zip
 
 universal_binaries:
-  - replace: true
+  - id: mac
+    ids:
+      - "linux"
+    replace: true
     name_template: "swo"
 
 changelog:
   disable: true
 
 checksum:
-#  ids:
-#    - linux
-#    - win
+  ids:
+    - "win"
   disable: false
   split: false
   name_template: '{{ .ProjectName }}_checksums.txt'
