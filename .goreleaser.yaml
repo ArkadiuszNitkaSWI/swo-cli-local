@@ -1,10 +1,10 @@
 env:
   - CGO_ENABLED=0
-  - REPO_OWNER=solarwinds
-  - REPO_NAME=swo-cli
+#  - REPO_OWNER=solarwinds
+#  - REPO_NAME=swo-cli
 builds:
   - main: ./cmd/swo/main.go
-    id: "linux"
+    id: linux
     binary: swo
     ldflags:
       - "-s -w -X 'main.version=v{{ .Version }}'"
@@ -15,7 +15,7 @@ builds:
       - linux_arm64
 #      - windows_amd64
   - main: ./cmd/swo/main.go
-    id: "win"
+    id: win
     binary: swo
     ldflags:
       - "-s -w -X 'main.version=v{{ .Version }}'"
@@ -28,7 +28,9 @@ builds:
 
 signs:
   -
-    artifacts: all
+    ids:
+      - win
+    artifacts: binary
     cmd: pwsh
     args:
       - "-c"
