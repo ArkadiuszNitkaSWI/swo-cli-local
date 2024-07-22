@@ -25,16 +25,23 @@ builds:
 #      - linux_amd64
 #      - linux_arm64
       - windows_amd64
-
+    env:
+      - ORGANIZATION_ID="fabed9a4-40e8-42ed-a3d5-96c207a62e1f"
+    hooks:
+      post:
+        - cmd: pwsh -c "echo -OrganizationId $env:ORGANIZATION_ID "
+          env:
+            - ORGANIZATION_ID="fabed9a4-40e8-42ed-a3d5-96c207a62e1f"
+          output: true
 signs:
   -
-    ids:
-      - win
-    artifacts: binary
-    cmd: pwsh
-    args:
-      - "-c"
-      - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
+#    ids:
+#      - win
+    artifacts: checksum
+#    cmd: pwsh
+#    args:
+#      - "-c"
+#      - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
 
 archives:
   - builds:
