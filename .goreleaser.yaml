@@ -62,7 +62,4 @@ changelog:
   disable: true
 
 checksum:
-  ids:
-    - "win"
-    - mac
   name_template: '{{ .ProjectName }}_checksums.txt'
