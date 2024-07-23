@@ -1,7 +1,7 @@
 env:
   - CGO_ENABLED=0
-#  - REPO_OWNER=solarwinds
-#  - REPO_NAME=swo-cli
+  - REPO_OWNER=solarwinds
+  - REPO_NAME=swo-cli
 builds:
   - main: ./cmd/swo/main.go
     id: linux
@@ -25,24 +25,14 @@ builds:
 #      - linux_amd64
 #      - linux_arm64
       - windows_amd64
-    env:
-      - ORGANIZATION_ID="fabed9a4-40e8-42ed-a3d5-96c207a62e1f"
     hooks:
       post:
-        - cmd: pwsh -c "echo -OrganizationId $env:ORGANIZATION_ID "
-          env:
-            - ORGANIZATION_ID="fabed9a4-40e8-42ed-a3d5-96c207a62e1f"
-          output: true
-signs:
-  -
-#    ids:
-#      - win
-    artifacts: checksum
-#    cmd: pwsh
-#    args:
-#      - "-c"
-#      - "Submit-SigningRequest -ApiToken '$CI_USER_TOKEN' -OrganizationId '$ORGANIZATION_ID' -ProjectSlug '$PROJECT' -SigningPolicySlug '$SIGNING_POLICY' -ArtifactConfigurationSlug '$ARTIFACT_CONFIGURATION' -InputArtifactPath '${artifact}' -OutputArtifactPath '${signature}' -WaitForCompletion"
-
+        - env:
+            - SP_SIGNING_POLICY=Release
+            - SP_ARTIFACT_CONFIGURATION=exe
+#          cmd: pwsh -c "Submit-SigningRequest -ApiToken "$env:SP_CI_USER_TOKEN" -OrganizationId "$env:SP_ORGANIZATION_ID" -ProjectSlug "$env:SP_PROJECT" -SigningPolicySlug "$env:SP_SIGNING_POLICY" -ArtifactConfigurationSlug "$env:SP_ARTIFACT_CONFIGURATION" -InputArtifactPath '{{ .Path }}' -OutputArtifactPath '{{ .Path }}' -Force -WaitForCompletion"
+          cmd: pwsh -c "echo -ApiToken "$env:SP_CI_USER_TOKEN" -OrganizationId "$env:SP_ORGANIZATION_ID" -ProjectSlug "$env:SP_PROJECT" -SigningPolicySlug "$env:SP_SIGNING_POLICY" -ArtifactConfigurationSlug "$env:SP_ARTIFACT_CONFIGURATION" -InputArtifactPath '{{ .Path }}' -OutputArtifactPath '{{ .Path }}' -Force -WaitForCompletion"
+          output: false
 archives:
   - builds:
       - win
